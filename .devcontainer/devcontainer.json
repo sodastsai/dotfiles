@@ -2,7 +2,8 @@
   "customizations": {
     "vscode": {
       "settings": {
-        "locale": "en"
+        "locale": "en",
+        "terminal.integrated.defaultProfile.linux": "zsh"
       }
     }
   }
