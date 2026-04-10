@@ -26,14 +26,6 @@ for pattern in "${dotfiles[@]}"; do
 done
 
 # Claude setup
-claude_files=(
-  CLAUDE.md
-)
-for pattern in "${claude_files[@]}"; do
-  for file in "$DOTFILES_ROOT"/$pattern; do
-    rel="${file#"$DOTFILES_ROOT/"}"
-    mkdir -p "$HOME/.claude/$(dirname "$rel")"
-    cp "$file" "$HOME/.claude/$rel"
-  done
-done
+mkdir -p "$HOME/.claude"
+cp "$DOTFILES_ROOT/CLAUDE.common.md" "$HOME/.claude/CLAUDE.md"
 curl -fsSL https://claude.ai/install.sh | bash
