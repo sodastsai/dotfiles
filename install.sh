@@ -11,7 +11,19 @@ else
   "$HOME/.oh-my-zsh/tools/upgrade.sh"
 fi
 
-cp "$DOTFILES_ROOT/.zshrc" "$HOME/.zshrc"
+# copying dotfiles
+dotfiles=(
+  .zshrc
+  .editorconfig
+  .devcontainer/*
+)
+for pattern in "${dotfiles[@]}"; do
+  for file in "$DOTFILES_ROOT"/$pattern; do
+    rel="${file#"$DOTFILES_ROOT/"}"
+    mkdir -p "$HOME/$(dirname "$rel")"
+    cp "$file" "$HOME/$rel"
+  done
+done
 
 # Claude code
 curl -fsSL https://claude.ai/install.sh | bash
