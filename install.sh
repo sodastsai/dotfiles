@@ -32,6 +32,7 @@ done
 
 # claude
 symlink "$DOTFILES_ROOT/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-if [ -f "$DOTFILES_ROOT/claude/settings.json" ]; then
-  symlink "$DOTFILES_ROOT/claude/settings.json" "$HOME/.claude/settings.json"
-fi
+for name in settings.json rules commands agents skills; do
+  src="$DOTFILES_ROOT/claude/$name"
+  [ -e "$src" ] && symlink "$src" "$HOME/.claude/$name"
+done
