@@ -2,8 +2,9 @@
   "features": {
     "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
   },
+  "remoteUser": "codespace",
   "mounts": [
-    "source=claude-config,target=/claude,type=volume"
+    "source=claude-code-config-${devcontainerId},target=/home/codespace/.claude,type=volume"
   ],
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {

@@ -1,18 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-
-
-# Claude persistence
-# If volume is empty (first time), seed it from feature-prepared ~/.claude
-if [ -z "$(ls -A /claude 2>/dev/null)" ]; then
-  rsync -a ~/.claude/ /claude/
-fi
-# Replace ~/.claude with symlink to persistent volume
-rm -rf ~/.claude
-ln -s /claude ~/.claude
-
+# Claude Persistence
+sudo chown -R codespace:codespace /home/codespace/.claude
 
 # oh-my-zsh update
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
