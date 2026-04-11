@@ -3,16 +3,41 @@ set -euo pipefail
 
 DOTFILES_ROOT="$(cd "$(dirname "$0")" && pwd)"
 
+symlink() {
+  local src="$1" dst="$2"
+  mkdir -p "$(dirname "$dst")"
+  ln -sf "$src" "$dst"
+}
+
 # zsh
-chsh -s "$(which zsh)"
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-else
-  "$HOME/.oh-my-zsh/tools/upgrade.sh"
+for f in "$DOTFILES_ROOT"/zsh/.*; do
+  name="$(basename "$f")"
+  [[ "$name" == "." || "$name" == ".." || "$name" == ".gitkeep" ]] && continue
+  symlink "$f" "$HOME/$name"
+done
+
+# git
+for f in "$DOTFILES_ROOT"/git/.*; do
+  name="$(basename "$f")"
+  [[ "$name" == "." || "$name" == ".." || "$name" == ".gitkeep" ]] && continue
+  symlink "$f" "$HOME/$name"
+done
+
+# ide
+for f in "$DOTFILES_ROOT"/ide/.*; do
+  name="$(basename "$f")"
+  [[ "$name" == "." || "$name" == ".." || "$name" == ".gitkeep" ]] && continue
+  symlink "$f" "$HOME/$name"
+done
+
+# devenv (.devcontainer contents → ~/.devcontainer/)
+for f in "$DOTFILES_ROOT"/devenv/.devcontainer/*; do
+  [ -e "$f" ] || continue
+  symlink "$f" "$HOME/.devcontainer/$(basename "$f")"
+done
+
+# claude
+symlink "$DOTFILES_ROOT/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+if [ -f "$DOTFILES_ROOT/claude/settings.json" ]; then
+  symlink "$DOTFILES_ROOT/claude/settings.json" "$HOME/.claude/settings.json"
 fi
-
-# Claude CLI
-curl -fsSL https://claude.ai/install.sh | bash
-
-# symlink dotfiles
-"$DOTFILES_ROOT/link.sh"

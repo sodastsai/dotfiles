@@ -1,4 +1,5 @@
 {
+  "postCreateCommand": "bash ${localWorkspaceFolder}/.devcontainer/setup.sh && bash ${localWorkspaceFolder}/install.sh",
   "customizations": {
     "vscode": {
       "settings": {
