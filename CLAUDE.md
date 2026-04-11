@@ -2,7 +2,7 @@
 
 ## Overview
 Personal dotfiles for macOS and GitHub Codespaces environments.
-Symlinks managed by `link.sh`, tool setup bootstrapped by `install.sh`.
+Symlinks managed by `install.sh`, tool setup bootstrapped by `.devcontainer/setup.sh`.
 
 ## Structure
 - `zsh/` — zsh config
@@ -10,8 +10,8 @@ Symlinks managed by `link.sh`, tool setup bootstrapped by `install.sh`.
 - `git/` — global git config
 - `ide/` — common IDE setup
 - `devenv/` — dev environment setup (containers, codespaces)
-- `install.sh` — bootstrap script
-- `link.sh` — symlinks dotfiles into place
+- `install.sh` — symlinks dotfiles into place
+- `.devcontainer/setup.sh` — Codespaces postCreateCommand: shell, oh-my-zsh, Claude Code
 
 ## Key Rules
 - All `*.sh` scripts must be idempotent
@@ -22,3 +22,4 @@ Symlinks managed by `link.sh`, tool setup bootstrapped by `install.sh`.
 ## Out of Scope
 - No package installation (Homebrew, apt)
 - No SSH key management
+- Do not symlink `.devcontainer/` — each codespace/project may override it with different base images or features

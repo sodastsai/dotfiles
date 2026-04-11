@@ -30,12 +30,6 @@ for f in "$DOTFILES_ROOT"/ide/.*; do
   symlink "$f" "$HOME/$name"
 done
 
-# devenv (.devcontainer contents → ~/.devcontainer/)
-for f in "$DOTFILES_ROOT"/devenv/.devcontainer/*; do
-  [ -e "$f" ] || continue
-  symlink "$f" "$HOME/.devcontainer/$(basename "$f")"
-done
-
 # claude
 symlink "$DOTFILES_ROOT/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 if [ -f "$DOTFILES_ROOT/claude/settings.json" ]; then
