@@ -1,5 +1,8 @@
 {
-  "postCreateCommand": "bash ${localWorkspaceFolder}/.devcontainer/setup.sh && bash ${localWorkspaceFolder}/install.sh",
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "vscode": {
       "settings": {

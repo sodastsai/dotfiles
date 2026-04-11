@@ -10,6 +10,3 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 else
   "$HOME/.oh-my-zsh/tools/upgrade.sh"
 fi
-
-# Claude Code
-curl -fsSL https://claude.ai/install.sh | bash
