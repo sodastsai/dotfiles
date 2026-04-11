@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# zsh
-chsh -s "$(which zsh)"
+DOTFILES_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 # oh-my-zsh
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -10,3 +9,6 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
 else
   "$HOME/.oh-my-zsh/tools/upgrade.sh"
 fi
+
+# dotfiles
+"$DOTFILES_ROOT/install.sh"
