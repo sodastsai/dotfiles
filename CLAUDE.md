@@ -21,6 +21,9 @@ Symlinks managed by `install.sh`, tool setup bootstrapped by `.devcontainer/setu
 - Don't proactively make a commit until instructed to do so
 - Never commit secrets — use env var references
 
+## Git Version Note
+Git v2.32+ does not follow symlinks for files it reads directly (`.gitignore`, `.gitattributes`, etc.), so everything in `git/` is copied rather than symlinked.
+
 ## Out of Scope
 - No package installation (Homebrew, apt)
 - No SSH key management

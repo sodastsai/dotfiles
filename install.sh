@@ -17,6 +17,19 @@ symlink() {
   fi
 }
 
+# copy_file is used instead of symlink for files that must be regular files
+# (e.g. .gitignore — git v2.32+ does not follow symlinks for ignore files)
+copy_file() {
+  local src="$1" dst="$2"
+  mkdir -p "$(dirname "$dst")"
+  if cp -f "$src" "$dst"; then
+    log "copied $dst <- $src"
+  else
+    fail "failed to copy $dst <- $src"
+    return 1
+  fi
+}
+
 # zsh
 log "--- zsh ---"
 for f in "$DOTFILES_ROOT"/zsh/.*; do
@@ -26,11 +39,13 @@ for f in "$DOTFILES_ROOT"/zsh/.*; do
 done
 
 # git
+# git v2.32+ does not follow symlinks for files it reads directly (.gitignore,
+# .gitattributes, etc.), so copy everything in git/ instead of symlinking
 log "--- git ---"
 for f in "$DOTFILES_ROOT"/git/.*; do
   name="$(basename "$f")"
   [[ "$name" == "." || "$name" == ".." || "$name" == ".gitkeep" ]] && continue
-  symlink "$f" "$HOME/$name"
+  copy_file "$f" "$HOME/$name"
 done
 
 # ide
