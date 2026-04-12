@@ -13,7 +13,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "anthropic.claude-code"
+        "anthropic.claude-code",
+        "ms-vscode.vscode-loc-en"
       ],
       "settings": {
         "locale": "en",
