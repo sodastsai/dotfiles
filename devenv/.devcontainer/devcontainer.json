@@ -7,8 +7,16 @@
     "source=claude-code-config-${devcontainerId},target=/home/codespace/.claude,type=volume"
   ],
   "containerEnv": {
-    "CLAUDE_CONFIG_DIR": "/home/codespace/.claude"
+    "CLAUDE_CONFIG_DIR": "/home/codespace/.claude",
+    "LANG": "en_US.UTF-8",
+    "LC_ALL": "en_US.UTF-8"
   },
+  "runArgs": [
+    "--env",
+    "LANG=en_US.UTF-8",
+    "--env",
+    "LC_ALL=en_US.UTF-8"
+  ],
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "vscode": {
