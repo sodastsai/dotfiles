@@ -11,12 +11,6 @@
     "LANG": "en_US.UTF-8",
     "LC_ALL": "en_US.UTF-8"
   },
-  "runArgs": [
-    "--env",
-    "LANG=en_US.UTF-8",
-    "--env",
-    "LC_ALL=en_US.UTF-8"
-  ],
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "vscode": {
