@@ -6,12 +6,12 @@
   "mounts": [
     "source=claude-code-config-${devcontainerId},target=/home/codespace/.claude,type=volume"
   ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/codespace/.claude"
+  },
   "postCreateCommand": "bash .devcontainer/setup.sh",
   "customizations": {
     "vscode": {
-      "extensions": [
-        "anthropic.claude-code"
-      ],
       "settings": {
         "locale": "en",
         "terminal.integrated.defaultProfile.linux": "zsh"
