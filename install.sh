@@ -4,7 +4,7 @@ set -euo pipefail
 DOTFILES_ROOT="$(cd "$(dirname "$0")" && pwd)"
 
 log()  { echo "[install] $*"; }
-fail() { echo "[install] ERROR: $*" >&2; }
+fail() { echo "[install] ERROR: $*"; }
 
 symlink() {
   local src="$1" dst="$2"
@@ -17,8 +17,6 @@ symlink() {
   fi
 }
 
-# copy_file is used instead of symlink for files that must be regular files
-# (e.g. .gitignore — git v2.32+ does not follow symlinks for ignore files)
 copy_file() {
   local src="$1" dst="$2"
   mkdir -p "$(dirname "$dst")"
