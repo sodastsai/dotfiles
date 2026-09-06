@@ -6,10 +6,11 @@ fail() { echo "[setup] ERROR: $*" >&2; }
 
 # Claude Persistence
 log "--- claude persistence ---"
-if sudo chown -R codespace:codespace /home/codespace/.claude; then
-  log "chown /home/codespace/.claude OK"
+mkdir -p "${HOME}"/.claude
+if sudo chown -R "${USER}":"${USER}" "${HOME}"/.claude; then
+  log "chown "${HOME}"/.claude OK"
 else
-  fail "chown /home/codespace/.claude failed"
+  fail "chown "${HOME}"/.claude failed"
   exit 1
 fi
 
